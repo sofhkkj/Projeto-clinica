@@ -26,11 +26,47 @@ switch($_REQUEST['acao']) {
         break;
 
     case 'editar':
-        //code
+        $nome = $_POST['nome_medico'];
+        $crm = $_POST['crm_medico'];
+        $especialidade = $_POST['especialidade_medico'];
+    
+        $sql = "UPDATE medico SET
+                nome_medico= '{$nome}',
+                crm_medico= '{$crm}',
+                especialidade_medico= '{$especialidade}'
+                WHERE
+                id_medico=".$_POST["id_medico"];
+    
+                $res = $conn->query($sql);
+    
+                if ($res == true) {
+                    print "<script>alert('Editado com sucesso!');</script>";
+                    print "<script>location.href = '?page=listar-medico';</script>";
+                } else {
+                    print "<script>alert('Não deu certo!');</script>";
+                    print "<script>location.href = '?page=listar-medico';</script>";
+                }
+                
         break;
 
     case 'excluir':
-        //code
+       
+    
+        $sql = "DELETE FROM medico
+                WHERE
+                id_medico=".$_REQUEST["id_medico"];
+    
+                $res = $conn->query($sql);
+    
+                if ($res == true) {
+                    print "<script>alert('Excluído com sucesso!');</script>";
+                    print "<script>location.href = '?page=listar-medico';</script>";
+                } else {
+                    print "<script>alert('Não deu certo!');</script>";
+                    print "<script>location.href = '?page=listar-medico';</script>";
+                }
+                
+        break;
         break;
  
 }
